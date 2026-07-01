@@ -12,6 +12,9 @@ def create_app():
     app.config['SECRET_KEY']='12%^&*FGTRvgab!(*)bnHJvcxzO???:"((***&&&}))'
     db.init_app(app)
     app.app_context().push()
+    login_manager=LoginManager()
+    login_manager.init_app(app)
+    login_manager.login_view='login'
     return app 
 
 app=create_app()
@@ -24,9 +27,12 @@ if __name__=="__main__":
         db.create_all()
         admin=User.query.filter_by(role='admin').first()
         if admin is None:
-            admin=User(user_name='pammi_kumari', email='adminEmail@gmail.com',password='iamadmin',role='admin')
+            pin='iamadmin'
+            hash_pin=bcrypt.generate_password_hash(pin)
+            admin=User(user_name='pammi_kumari', email='adminEmail@gmail.com',password=hash_pin,role='Admin')
+            #login(admin)
             db.session.add(admin)
             db.session.commit()
         
 
-    app.run(debug=True)
+    app.run(debug=True,use_reloader=False)

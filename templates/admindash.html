@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin_Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <h2><em>Trekking App</em></h2>
+    
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Treks</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">staff</a>
+        </li>
+          <a class="nav-link" href="#">Users</a>
+        </li>
+          <a class="nav-link" href="#">analysis</a>
+        </li>
+        
+        
+      </ul>
+      
+    </div>
+  </div>
+</nav>
+
+<div style="background-color: antiquewhite; border: 1px rgb(188, 238, 238); box-shadow: 0px 4px 8px rgb(137, 184, 184); height: 55px;">
+    <p style="text-align: center; color: rgb(75, 80, 15); font-size: 40px;"><em>Welcome Admin</em></p>
+ 
+</div>
+
+<nav class="navbar navbar-light bg-light">
+  <div class="container-fluid">
+    <p>search treks stff and user by their name-</p>
+    <form class="d-flex" style="margin-right: 550px; width:500px;" action="/adminDashboard/" method="POST">
+      <input class="form-control me-2" type="search" name="query" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+<div style="margin-top: 25px;">
+<button type="button" class="btn btn-primary" style="margin:25px; height:55px;">
+  Users <span class="badge bg-secondary">{{count_User}}</span>
+</button>
+<button type="button" class="btn btn-primary" style="margin:25px; height:55px;">
+  Trek_staff <span class="badge bg-secondary">{{count_staff}}</span>
+</button>
+<button type="button" class="btn btn-primary" style="margin:25px; height:55px;">
+  treks <span class="badge bg-secondary">{{count_treks}}</span>
+</button>
+<button type="button" class="btn btn-primary" style="margin:25px; height:55px;">
+  Booking <span class="badge bg-secondary">{{count_booking}}</span>
+</button>
+</div>
+
+<div>
+  {% if data1 %}
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">name</th>
+          <th scope="col">email</th>
+          <th scope="col">action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in data2 %}
+          <tr>
+            <th scope="row">1</th>
+            <td>{{row.user_name}}</td>
+            <td>{{row.email}}</td>
+            <td><a>blacklist</a>></td>
+          </tr>
+        {% endfor %}
+        
+      </tbody>
+    </table>
+  {% endif %}
+
+  {% if data2 %}
+    <table class="table">
+      <thead>
+        <th scope="col">#</th>
+          <th scope="col">ID</th>
+          <th scope="col">Trek Name</th>
+          <th scope="col">Location</th>
+          <th scope="col">Difficulty</th>
+          <th scope="col">slots</th>
+          <th scope="col">Status</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in data2 %}
+        <tr>
+          <th scope="row">{{row.index}}</th>
+          <td>{{row.trek_id}}</td>
+          <td>{{row.Trek_name}}</td>
+          <td>{{row.location}}</td>
+          <td>{{row.Difficulty}}</td>
+          <td>{{row.Available_slot}}</td>
+          <td>{{row.status}}</td>
+          <td><a>edit</a><a>dlelete</a></td>
+
+        </tr>
+        {% endfor %}
+        
+      </tbody>
+    </table>
+  {% endif %}
+  
+  
+
+
+</div>
+<div style="margin-top: 25px;">
+  <h4>waiting_staff</h4>
+  {% if wait_staff %}
+      <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">staff_id</th>
+          <th scope="col">Name</th>
+          <th scope="col">email</th>
+          <th scope="col">contact</th>
+          <th scope="col">Status</th>
+          <th scope="col"><a>Action</a>></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in wait_staff %}
+          <tr>
+            <th scope="row">1</th>
+            <td>{{row.staff_id}}</td>
+            <td>{{row.staff_name}}</td>
+            <td>{{row.email}}</td>
+            <td>{{row.contact}}</td>
+            <td>{{row.status}}</td>
+            <td><a href="baki hai">approved</a> <a href="baki hai">reject</a></td>
+
+            
+          </tr>
+        {% endfor %}
+        
+      </tbody>
+    </table>
+  {% else %}
+   <h4>no pending staff</h4>
+  {% endif %}
+</div>
+<div style="margin-top: 25px;">
+  <h4>Approved_staff</h4>
+  {% if approved_staff %}
+    <table class="table">
+        <thead>
+          <tr>
+                <th scope="col">#</th>
+                <th scope="col">staff_id</th>
+                <th scope="col">Name</th>
+                <th scope="col">email</th>
+                <th scope="col">contact</th>
+                <th scope="col">Status</th>
+                <th scope="col"><a>Action</a>></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for row in approved_staff %}
+            <tr>
+              <th scope="row">1</th>
+              <td>{{row.staff_id}}</td>
+              <td>{{row.staff_name}}</td>
+              <td>{{row.email}}</td>
+              <td>{{row.contact}}</td>
+              <td>{{row.status}}</td>
+              <td><a href="baki hai">blacklist</a></td>
+
+            </tr>
+          {% endfor %}
+
+          
+        </tbody>
+    </table>
+  {% endif %} 
+</div>
+<div style="margin-top: 25px;">
+  <h4>Treks</h4>
+  {% if treks %}
+   <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">ID</th>
+          <th scope="col">Trek Name</th>
+          <th scope="col">Location</th>
+          <th scope="col">Difficulty</th>
+          <th scope="col">slots</th>
+          <th scope="col">Status</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in treks %}
+        <tr>
+          <th scope="row">{{row.index}}</th>
+          <td>{{row.trek_id}}</td>
+          <td>{{row.Trek_name}}</td>
+          <td>{{row.location}}</td>
+          <td>{{row.Difficulty}}</td>
+          <td>{{row.Available_slot}}</td>
+          <td>{{row.status}}</td>
+          <td><a>edit</a><a>dlelete</a></td>
+
+        </tr>
+        {% endfor %}
+        
+      </tbody>
+    </table>
+  {% else %}
+   <h4>no Treks</h4>
+  {% endif %}
+</div>
+
+
+
+
+</body>
+</html>

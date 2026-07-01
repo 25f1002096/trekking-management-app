@@ -9,14 +9,17 @@ class User(db.Model,UserMixin):
     user_name=db.Column(db.String(20), nullable=False)
     email=db.Column(db.String(100),nullable=False,unique=True)
     password=db.Column(db.String, nullable=False)
-    role=db.Column(db.String, nullable=False)  #User (role: Admin / Trek Staff / Trekker)
+    role=db.Column(db.String, nullable=False)  #User (role: Admin / Trek_Staff / Trekker)
+
+    def get_id(self):
+        return str(self.user_id)
 
 
 
 
 class Trek(db.Model):
     __tablename__='trek'
-    trek_id=db.Column(db.Integer,primary_key=True)
+    trek_id=db.Column(db.Integer,primary_key=True, autoincrement=True)
     Trek_name=db.Column(db.String,nullable=False)
     Difficulty=db.Column(db.String,nullable=False) #Easy,Moderate,Hard
     route=db.Column(db.String,nullable=False)
@@ -32,7 +35,7 @@ class Trek(db.Model):
 
 class Booking(db.Model): #many booking have one trekker
     __tablename__='booking'
-    Book_id=db.Column(db.Integer,primary_key=True)
+    Book_id=db.Column(db.Integer,primary_key=True, autoincrement=True)
     user_id=db.Column(db.Integer,db.ForeignKey("trekker.user_id"), nullable=False)
     trek_id=db.Column(db.Integer,db.ForeignKey("trek.trek_id"), nullable=False)
     booking_date=db.Column(db.DateTime)
@@ -43,7 +46,7 @@ class Booking(db.Model): #many booking have one trekker
 
 class Trekker(db.Model): #it is user who use the app one treeker have many bokking
     __tablename__='trekker'
-    user_id=db.Column(db.Integer, nullable=False,primary_key=True)
+    user_id=db.Column(db.Integer, nullable=False,primary_key=True,autoincrement=True)
     
     user_name=db.Column(db.String, nullable=False)
     booking=db.relationship('Booking',back_populates="owener")
@@ -52,9 +55,10 @@ class Trekker(db.Model): #it is user who use the app one treeker have many bokki
 
 class Trek_staff(db.Model):
     __tablename__='trek_staff'
-    staff_id=db.Column(db.Integer, nullable=False,primary_key=True)
+    staff_id=db.Column(db.Integer, nullable=False,primary_key=True,autoincrement=True)
     staff_name=db.Column(db.String, nullable=False)
     trek_id=db.Column(db.String,db.ForeignKey("trek.trek_id"), nullable=False)
+    email=db.Column(db.String, nullable=False)
     treks_assigned=db.relationship('Trek',secondary="trek_staff_association", back_populates="assigned_staff") 
     status=db.Column(db.String, default='blacklist')#blacklist,approved 
     contact=db.Column(db.Integer,nullable=False) 

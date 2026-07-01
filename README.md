@@ -1,2 +1,3 @@
 # trekking-management-app
 This is a smart trekking management app that helps user discover,book,and explore exciting trekking routes with ease.from historical places to spiritual destinations,and many more.
+<h3>i was geting problem in creating table because i write db.create_all instead of db.create_all(),it took me more time to realize beacuse i am looking error in model.py after sometime i look in app.py,cause error was like there is no USER table </h3>
