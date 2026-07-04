@@ -4,8 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trekker_Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body>
-    <h4>this is user dasboard</h4>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <h4>Trekking Management App</h4>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent" style="margin-left: 895px;">
+                <a href="#"><button type="button" class="btn btn-primary position-relative">
+                    Profile
+                    <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle">
+                        <span class="visually-hidden">New alerts</span>
+                    </span>
+                </button></a>
+            
+            </div>
+        </div>
+    </nav>
+    <div style="background-color: bisque; text-align: center; color:blueviolet; height:52px; box-shadow: 0px 4px 8px rgb(252, 233, 124, 0.801);">
+        <h4 style="font-size: 40px;"><i>welcome! {{user}}</i></h4>
+    </div>
+    
+  
 </body>
 </html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>manage trek</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+       <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand" href="#">Trekking Management App</a>
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
+
+            <button type="button" class="btn btn-primary position-relative" style="margin-right: 25px;">
+                Profile
+                <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle">
+                    <span class="visually-hidden">New alerts</span>
+                </span>
+            </button>
+            </div>
+        </div>
+        </nav>
+    <div style="margin:55px;">
+       <h5>{{trek.Trek_name}}</h5>
+       <form action="/manageTrek/{{trek.trek_id}}/", method="POST">
+        <label for="exampleFormControlInput1" class="form-label">Location</label>
+        <input class="form-control" type="text" value="{{trek.location}}" aria-label="readonly input example" readonly>
+        <label for="exampleFormControlInput1" class="form-label">Duration</label>
+        <input class="form-control" type="text" value="{{trek.Duration}}" aria-label="readonly input example" readonly>
+        <label for="exampleFormControlInput1" class="form-label">Start_date</label>
+        <input class="form-control" type="text" value="{{trek.s_date}}" aria-label="readonly input example" readonly>
+        <label for="exampleFormControlInput1" class="form-label">end_date</label>
+        <input class="form-control" type="text" value="{{trek.e_date}}" aria-label="readonly input example" readonly>
+        <label for="exampleFormControlInput1" class="form-label">total_slot</label>
+        <input class="form-control" type="text" value="{{trek.total_slot}}" aria-label="readonly input example" name="total_slot" >
+        <label for="exampleFormControlInput1" class="form-label">Available_slot</label>
+        <input class="form-control" type="text" value="{{trek.Available_slot}}" aria-label="readonly input example" name="available_slot" readonly>
+        <label for="exampleFormControlInput1" class="form-label">Status</label>
+        <select class="form-select" aria-label="Default select example" name="status">
+            <option selected>Open this select menu</option>
+            <option value="1">closed</option>
+            <option value="2">open</option>
+        </select>
+
+        <label for="exampleFormControlInput1" class="form-label">Mark AS Started/Completed 
+        </label>
+        <select class="form-select" aria-label="Default select example" name="mark">
+            <option selected>Open this select menu</option>
+            <option value="1">Start</option>
+            <option value="2">Complete</option>
+        </select>
+        
+        <button type="submit" class="btn-btn-primary" style="margin:25px;">submit</button>
+       </form>
+
+       
+    </div>
+    <div style="height:55px;">
+        <h4><strong>List of Users {{participant}}</strong></h4>
+        <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">User name</th>
+      <th scope="col">email</th>
+      <th scope="col">booking date</th>
+      <th scope="col">status</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for row in trek_booking %}
+        <tr>
+        <th scope="row">1</th>
+        <td>{{row.owner.user_name}}</td>
+        <td>{{row.owner.email}}</td>
+        <td>{{row.booking_date}}</td>
+        <td>{{row.status}}</td>
+        </tr>
+    {% endfor %}
+    
+  </tbody>
+</table>
+        
+    </div>
+</body>
+</html>

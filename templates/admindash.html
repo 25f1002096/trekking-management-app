@@ -14,7 +14,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Treks</a>
+          <a class="nav-link active" aria-current="page" href="#"> create Treks</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">staff</a>
@@ -77,7 +77,7 @@
             <th scope="row">1</th>
             <td>{{row.user_name}}</td>
             <td>{{row.email}}</td>
-            <td><a>blacklist</a>></td>
+            <td><a href="#">blacklist</a></td>
           </tr>
         {% endfor %}
         
@@ -108,7 +108,8 @@
           <td>{{row.Difficulty}}</td>
           <td>{{row.Available_slot}}</td>
           <td>{{row.status}}</td>
-          <td><a>edit</a><a>dlelete</a></td>
+          <td><a href="#">edit</a> <a href="#"> delete</a>
+            </td>
 
         </tr>
         {% endfor %}
@@ -133,7 +134,7 @@
           <th scope="col">email</th>
           <th scope="col">contact</th>
           <th scope="col">Status</th>
-          <th scope="col"><a>Action</a>></th>
+          <th scope="col">Action></th>
         </tr>
       </thead>
       <tbody>

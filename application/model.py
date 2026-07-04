@@ -26,10 +26,12 @@ class Trek(db.Model):
     Duration=db.Column(db.String,nullable=False)
     Available_slot=db.Column(db.Integer,nullable=False)
     #assigned_staff_id=db.Column(db.String,nullable=False)
-    status=db.Column(db.String,nullable=False, default='Closed') #Status (Pending / Approved / Open / Closed / Completed)
+    status=db.Column(db.String,nullable=False, default='Closed') #Status (/ Open / Closed / 
+    status2=db.Column(db.String,nullable=False, default="not_start") # not_start/ start/ complete
     location=db.Column(db.String,nullable=False)
     s_date=db.Column(db.DateTime,default=datetime.now)
     e_date=db.Column(db.DateTime)
+    total_slot=db.Column(db.Integer,nullable=False)
     assigned_staff=db.relationship('Trek_staff',secondary="trek_staff_association",back_populates="treks_assigned")
     book=db.relationship('Booking', back_populates="trek") 
 
@@ -47,7 +49,7 @@ class Booking(db.Model): #many booking have one trekker
 class Trekker(db.Model): #it is user who use the app one treeker have many bokking
     __tablename__='trekker'
     user_id=db.Column(db.Integer, nullable=False,primary_key=True,autoincrement=True)
-    
+    email=db.Column(db.String(100),nullable=False,unique=True)
     user_name=db.Column(db.String, nullable=False)
     booking=db.relationship('Booking',back_populates="owener")
     status=db.Column(db.String,default='notblacklist')#blacklist,notblacklist
@@ -57,7 +59,7 @@ class Trek_staff(db.Model):
     __tablename__='trek_staff'
     staff_id=db.Column(db.Integer, nullable=False,primary_key=True,autoincrement=True)
     staff_name=db.Column(db.String, nullable=False)
-    trek_id=db.Column(db.String,db.ForeignKey("trek.trek_id"), nullable=False)
+    trek_id=db.Column(db.String,db.ForeignKey("trek.trek_id"))
     email=db.Column(db.String, nullable=False)
     treks_assigned=db.relationship('Trek',secondary="trek_staff_association", back_populates="assigned_staff") 
     status=db.Column(db.String, default='blacklist')#blacklist,approved 
