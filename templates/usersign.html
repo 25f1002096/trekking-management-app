@@ -10,7 +10,7 @@
 <body>
    <div id="main">
     <div id="canva">
-        <a href="home.html">back</a>
+        <a href="{{url_for('home')}}">back</a><p>signin successfully</p>
         <h2 style="text-align:center; color: rgb(11, 11, 88);"><em>Signin</em></h2>
         
         <form action="/signinTrekker/" method="POST">
@@ -21,7 +21,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
-                    <input type="text" class="form-control" id="Email" name="email" placeholder="xyz@.com">
+                    <input type="text" class="form-control" id="email" name="email" placeholder="xyz@.com">
                 </div>
                 <div class="mb-3">
                     <label for="password" class="form-label">Password</label>
@@ -32,7 +32,7 @@
                     <button type="submit" class="btn btn-outline-primary">submit</button>
                     
                 </div>
-                <p>already have an account <a href="login.html">login</a> </p>
+                <p>already have an account <a href="/directingToDashboard/">login</a> </p>
 
 
             </div>

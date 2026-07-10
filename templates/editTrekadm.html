@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Treks</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>edit trek</title>
 </head>
 <body>
-    <div>
+    <div><p>assign staff once again</p>
         <nav class="navbar navbar-light bg-light">
             <div class="container-fluid">
                 <span class="navbar-brand mb-0 h1">Trekking Management App</span>
@@ -21,75 +20,72 @@
         <div class="canva" style=" padding:25px; border: 1px solid rgb(47, 159, 173); box-shadow: 0px 4px 8px rgb(25, 71, 163);">
             <h4 style="text-align: center; color:rgba(110, 22, 192, 0.877)"><strong><i>Create Trek</i></strong></h4>
             <div>
-                <form action="/createTrek/byadmin/" method="POST">
+                <form action="/admin/trek/edit/{{trek.trek_id}}/" method="POST">
                     <div class="mb-3">
                     <label for="Trekname" class="form-label">Trek name</label>
-                    <input type="text" class="form-control" id="Trekname" placeholder="name of the place" name="trek_name">
+                    <input type="text" class="form-control" value="trek.Trek_name" id="Trekname" placeholder="name of the place" name="trek_name">
                     </div>
                     <div class="mb-3">
                     <label for="location" class="form-label">Location</label>
-                    <input type="text" class="form-control" id="location" placeholder="name of the place" name="location">
+                    <input type="text" class="form-control" value="{{trek.location}}" id="location" placeholder="name of the place" name="location">
                     </div>
                     <div class="mb-3">
                     <label for="location" class="form-label">Difficulty</label>
                     <select class="form-select" aria-label="Default select example" name="difficulty">
                         <option selected>Open this select menu</option>
-                        <option value="Easy">Easy</option>
-                        <option value="Moderate">Modrate</option>
-                        <option value="Hard">Difficult</option> 
+                        <option value="1">Easy</option>
+                        <option value="2">Modrate</option>
+                        <option value="3">Difficult</option>
                     </select>
                     </div>
                     <div class="mb-3">
                     <label for="location" class="form-label">Duration(in Days)</label>
-                    <input type="text" class="form-control" id="location"  name="duration">
+                    <input type="text" class="form-control" id="location" value="{{trek.Duration}}"  name="duration">
                     </div>
                     <div class="mb-3">
                     <label for="location" class="form-label">Route</label>
-                    <input  class="form-control" id="location" placeholder="x to y " name="rute">
+                    <input  class="form-control" id="location" placeholder="x to y " value="{{trek.route}}" name="rute">
                     </div>
                     <div class="mb-3">
                     <label for="location" class="form-label">Available Slots</label>
-                    <input  class="form-control" id="location"  name="slot">
+                    <input  class="form-control" id="location" value="{{trek.total_slot}}"  name="slot">
                     </div>
                     <div class="mb-3">
                     <label for="location" class="form-label">start date</label>
-                    <input type="date" class="form-control" id="location"  name="start">
+                    <input type="date" class="form-control" id="location" value="{{trek.s_date}}" name="start">
                     </div>
                     <div class="mb-3">
                     <label for="location" class="form-label">end date</label>
-                    <input type="date" class="form-control" id="location"  name="end_date" min="{{today}}">
+                    <input type="date" class="form-control" id="location" value="{{trek.e_date}}" name="end_date" min="{{today}}">
                     </div>
                     <div class="mb-3">
                         <label for="location" class="form-label">Assigned staff</label>
                         
                             
                             {% for row in data %}
-                                <input type="checkbox" name="staff" value="{{row.staff_id}}"> {{row.staff_name}}
-                                
-                                
+                            <label><input type="checkbox" name="staff" value="{{row.staff_id}}"> {{row.staff_id}},{{row.staff_name}}</label>
                             {% endfor %}
-                            
                         
                     </div>
                     <div class="mb-3">
                     <label for="location" class="form-label">status</label>
-                    <select class="form-select" aria-label="Default select example" name="status">
+                    <select class="form-select" aria-label="Default select example" name="status" value="{{trek.status}}">
                         <option selected>--select status--</option>
                         
-                        <option value="Open">open</option>
-                        <option value="Closed">closed</option>
+                        <option value="1">open</option>
+                        <option value="2">closed</option>
 
                         
                     </select>
                     </div>
                     <div class="mb-3">
                     <label for="location" class="form-label">mark as start/complete/not start</label>
-                    <select class="form-select" aria-label="Default select example" name="mark">
+                    <select class="form-select" aria-label="Default select example" name="mark" value="{{trek.status2}}">
                         <option selected>--choose one--</option>
                         
-                        <option value="start">start</option>
-                        <option value="not_start">not_start</option>
-                        <option value="complete">completed</option>
+                        <option value="1">start</option>
+                        <option value="2">not_start</option>
+                        <option value="3">completed</option>
     
                     </select>
                     </div>

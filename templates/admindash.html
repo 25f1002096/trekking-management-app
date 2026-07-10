@@ -14,12 +14,12 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#"> create Treks</a>
+          <a class="nav-link active" aria-current="page" href="/createTrek/byadmin/"> create Treks</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">staff</a>
         </li>
-          <a class="nav-link" href="#">Users</a>
+          <a class="nav-link" href="/admin/user/">Users</a>
         </li>
           <a class="nav-link" href="#">analysis</a>
         </li>
@@ -40,7 +40,7 @@
   <div class="container-fluid">
     <p>search treks stff and user by their name-</p>
     <form class="d-flex" style="margin-right: 550px; width:500px;" action="/adminDashboard/" method="POST">
-      <input class="form-control me-2" type="search" name="query" placeholder="Search" aria-label="Search">
+      <input class="form-control me-2" type="text" name="seaq" placeholder="Search trek by name" aria-label="Search" required>
       <button class="btn btn-outline-success" type="submit">Search</button>
     </form>
   </div>
@@ -69,16 +69,24 @@
           <th scope="col">name</th>
           <th scope="col">email</th>
           <th scope="col">action</th>
+          <th scope="col">history</th>
+
         </tr>
       </thead>
       <tbody>
-        {% for row in data2 %}
+        {% for row in data1 %}
           <tr>
             <th scope="row">1</th>
-            <td>{{row.user_name}}</td>
+            <td>{{row.staff_name}}</td>
             <td>{{row.email}}</td>
-            <td><a href="#">blacklist</a></td>
+            {% if row.status=='approved' %}
+              <td><a href="/blacklist/staff/{{row.staff_id}}/">blacklist</a></td>
+            {% else %}
+              <td>{{row.status}}</td>
+            {% endif %}
+            <td><a href="/admin/staff/history/{{row.staff_id}}/">history</a></td>
           </tr>
+
         {% endfor %}
         
       </tbody>
@@ -108,7 +116,7 @@
           <td>{{row.Difficulty}}</td>
           <td>{{row.Available_slot}}</td>
           <td>{{row.status}}</td>
-          <td><a href="#">edit</a> <a href="#"> delete</a>
+          <td><a href="/admin/trek/edit/{{row.trek_id}}/">edit</a> <a href="/admin/trek/remove/{{row.trek_id}}/"> delete</a>
             </td>
 
         </tr>
@@ -135,6 +143,7 @@
           <th scope="col">contact</th>
           <th scope="col">Status</th>
           <th scope="col">Action></th>
+          <th scope="col">history></th>
         </tr>
       </thead>
       <tbody>
@@ -146,8 +155,8 @@
             <td>{{row.email}}</td>
             <td>{{row.contact}}</td>
             <td>{{row.status}}</td>
-            <td><a href="baki hai">approved</a> <a href="baki hai">reject</a></td>
-
+            <td><a href="/blacklist/staff/{{row.staff_id}}/">approved</a></td>
+            <td> <a href="/admin/staff/history/{{row.staff_id}}/">history</a></td>
             
           </tr>
         {% endfor %}
@@ -155,7 +164,7 @@
       </tbody>
     </table>
   {% else %}
-   <h4>no pending staff</h4>
+   <p>no pending staff</p>
   {% endif %}
 </div>
 <div style="margin-top: 25px;">
@@ -171,6 +180,8 @@
                 <th scope="col">contact</th>
                 <th scope="col">Status</th>
                 <th scope="col"><a>Action</a>></th>
+                <th scope="col">history</th>
+                
           </tr>
         </thead>
         <tbody>
@@ -182,8 +193,8 @@
               <td>{{row.email}}</td>
               <td>{{row.contact}}</td>
               <td>{{row.status}}</td>
-              <td><a href="baki hai">blacklist</a></td>
-
+              <td><a href="/blacklist/staff/{{row.staff_id}}/">blacklist</a></td>
+              <td><a href="/admin/staff/history/{{row.staff_id}}/">history</a></td>
             </tr>
           {% endfor %}
 
@@ -218,7 +229,7 @@
           <td>{{row.Difficulty}}</td>
           <td>{{row.Available_slot}}</td>
           <td>{{row.status}}</td>
-          <td><a>edit</a><a>dlelete</a></td>
+          <td><a href="/admin/trek/edit/{{row.trek_id}}/">edit</a> <a href="/admin/trek/remove/{{row.trek_id}}/">dlelete</a></td>
 
         </tr>
         {% endfor %}
@@ -226,7 +237,7 @@
       </tbody>
     </table>
   {% else %}
-   <h4>no Treks</h4>
+   <p>no Treks</p>
   {% endif %}
 </div>
 

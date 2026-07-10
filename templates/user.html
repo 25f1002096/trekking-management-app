@@ -7,9 +7,17 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body>
+    {% if status.status=='blacklist' %}
+        <h4>your are blacklisted</h4>
+    {% else %}
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
             <h4>Trekking Management App</h4>
+            
+
+            <div>
+                <a href='/user/history/{{user_id.user_id}}/'>^history</a>
+            </div>
             <div class="collapse navbar-collapse" id="navbarSupportedContent" style="margin-left: 895px;">
                 <a href="#"><button type="button" class="btn btn-primary position-relative">
                     Profile
@@ -24,7 +32,181 @@
     <div style="background-color: bisque; text-align: center; color:blueviolet; height:52px; box-shadow: 0px 4px 8px rgb(252, 233, 124, 0.801);">
         <h4 style="font-size: 40px;"><i>welcome! {{user}}</i></h4>
     </div>
-    
+    <div style="padding:30px;">
+
+    </div>
+    <div style="padding:30px;">
+        <h4 style="padding:30px;">search trek by name:</h4>
+        <div style="width:1000px; margin-left: 25px;">
+            <form class="d-flex" action="/userDashboard/" method="POST">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search_data">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+    <nav class="navbar navbar-expand-lg " style="background-color: white;">
+        <div class="container-fluid" >
+            <p style="margin-left: 900px;">Filter BY:</p>
+            <form action="/userDashboard/" method="POST">
+                <select class="form-select" aria-label="Default select example" style="width:155px; margin:15px;" name="difficulty">
+                    <option selected>Difficulty</option>
+                    <option value="Easy">Easy</option>
+                    <option value="Moderate">Medium</option>
+                    <option value="Hard">Hard</option>
+                </select>
+
+                <select class="form-select" aria-label="Default select example" style="width:155px; margin:15px;" name="location">
+                    <option selected>Location</option>
+                    {% for row in location %}
+                    <option value="{{row[0]}}">{{row}}</option>
+                    {% endfor %}
+                    
+                </select>
+                <button type="submit">submit</button>
+            </form>
+
+
+            
+            
+        </div>
+    </nav>
+    <div>
+        <h4>Treks</h4>
+        {% if trek_data or data %}
+          {% if trek_data %}
+            <table class="table">
+                <thead>
+                    <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Trek name</th>
+                    <th scope="col">difficulty</th>
+                    <th scope="col">route</th>
+                    <th scope="col">Duration</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Trek Detail</th>
+                    <th scope="col">Location</th>
+                    <th scope="col">Start Date</th>
+                    <th scope="col">End Date</th>
+                    <th scope="col">Available Slot</th>
+                    <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in trek_data %}
+                    <tr>
+                    <th scope="col">1</th>
+                    <td>{{row.Trek_name}}</td>
+                    <td>{{row.Difficulty}}</td>
+                    <td>{{row.route}}</td>
+                    <td>{{row.Duration}}</td>
+                    <td>{{row.status}}</td>
+                    <td>{{row.status2}}</td>
+                    <td>{{row.location}}</td>
+                    <td>{{row.s_date}}</td>
+                    <td>{{row.e_date}}</td>
+                    <td>{{row.total_slot}}</td>
+                    {% if row.status != 'complete' %}
+                      {% if row.Available_slot==0 %} 
+                        <td style="color:red;">Fulled</td>
+
+                      {% else %}
+                        <td><a href="/booking/details/{{row.trek_id}}/">book now</a></td>
+                      {% endif %} 
+                    {% else %}
+                    <td>completed</td>
+                    {% endif %}
+                    </tr>
+                    {% endfor %}
+
+                    
+                </tbody>
+            </table>
+          {% endif %}
+          {% if data %}
+           <table class="table">
+                <thead>
+                    <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Trek name</th>
+                    <th scope="col">difficulty</th>
+                    <th scope="col">route</th>
+                    <th scope="col">Duration</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Trek Detail</th>
+                    <th scope="col">Location</th>
+                    <th scope="col">Start Date</th>
+                    <th scope="col">End Date</th>
+                    <th scope="col">Available Slot</th>
+                    <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in data %}
+                    <tr>
+                    <th scope="row">1</th>
+                    <td>{{row.Trek_name}}</td>
+                    <td>{{row.Difficulty}}</td>
+                    <td>{{row.route}}</td>
+                    <td>{{row.Duration}}</td>
+                    <td>{{row.status}}</td>
+                    <td>{{row.status2}}</td>
+                    <td>{{row.location}}</td>
+                    <td>{{row.s_date}}</td>
+                    <td>{{row.e_date}}</td>
+                    <td>{{row.total_slot}}</td>
+                    <td><a href="/booking/details/{{row.trek_id}}/">book now</a></td>
+                    </tr>
+                    {% endfor %}
+                    
+                </tbody>
+            </table>
+
+          {% endif %}
+            
+
+
+        {% elif Treks %}
+           <table class="table">
+                <thead>
+                    <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Trek name</th>
+                    <th scope="col">difficulty</th>
+                    <th scope="col">route</th>
+                    <th scope="col">Duration</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Trek Detail</th>
+                    <th scope="col">Location</th>
+                    <th scope="col">Start Date</th>
+                    <th scope="col">End Date</th>
+                    <th scope="col">Available Slot</th>
+                    <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in Treks %}
+                    <tr>
+                    <th scope="row">1</th>
+                    <td>{{row.Trek_name}}</td>
+                    <td>{{row.Difficulty}}</td>
+                    <td>{{row.route}}</td>
+                    <td>{{row.Duration}}</td>
+                    <td>{{row.status}}</td>
+                    <td>{{row.status2}}</td>
+                    <td>{{row.location}}</td>
+                    <td>{{row.s_date}}</td>
+                    <td>{{row.e_date}}</td>
+                    <td>{{row.total_slot}}</td>
+                    <td><a href="/booking/details/{{row.trek_id}}/">book now</a></td>
+                    </tr>
+                    {% endfor %}
+                    
+                </tbody>
+            </table>
+         
+        {% endif %}
+    </div>
+    {% endif %}
   
 </body>
 </html>

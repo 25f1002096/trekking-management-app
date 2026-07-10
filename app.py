@@ -30,9 +30,10 @@ if __name__=="__main__":
             pin='iamadmin'
             hash_pin=bcrypt.generate_password_hash(pin)
             admin=User(user_name='pammi_kumari', email='adminEmail@gmail.com',password=hash_pin,role='Admin')
-            #login(admin)
+            
             db.session.add(admin)
             db.session.commit()
+            
         
 
     app.run(debug=True,use_reloader=False)

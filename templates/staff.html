@@ -10,6 +10,8 @@
     {% if status=='approved' %}
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
+            
+            <p>assigned_treks</p>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
             </button>
@@ -50,7 +52,8 @@
             <th scope="col">Trek name</th>
             <th scope="col">Location</th>
             <th scope="col">Participants</th>
-            <th scope="col">Slots</th>
+            <th scope="col">Available Slots</th>
+            <th scope="col">Total Slots</th>
             <th scope="col">status</th>
             <th scope="col">actions</th>
             </tr>
@@ -61,8 +64,9 @@
                 <th scope="row">1</th>
                 <td>{{row.Trek_name}}</td>
                 <td>{{row.location}}</td>
-                <td>{{row.total_slot-row.Available_slot}}</td>
+                <td>{{row.total_slot - row.Available_slot}}</td>
                 <td>{{row.Available_slot}}</td>
+                <td>{{row.total_slot}}</td>
                 <td>{{row.status}}</td>
                 <td><a href="/manageTrek/{{row.trek_id}}/"><button>Manage</button></a></td>
                 
@@ -76,6 +80,8 @@
     {% else %}
         <div>
             <h4>Wait! untill you are not approved</h4>
+            <p>signin successfully</p>
+            
         </div>
     {% endif %} 
 
