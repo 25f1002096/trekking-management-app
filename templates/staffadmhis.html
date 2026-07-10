@@ -22,14 +22,14 @@
   </thead>
   <tbody>
     {% if assigned_treks %}
-     {for row in assigned_treks %} 
+      {% for row in assigned_treks %} 
         <tr>
         <th scope="row">1</th>
         <td>{{row.Trek_name}}</td>
         <td>{{row.trek_id}}</td>
         <td>{{row.status}}</td>
         </tr>
-     {% endfor %}
+      {% endfor %}
     {% endif %}
    
    

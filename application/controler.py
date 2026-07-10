@@ -153,7 +153,7 @@ def user():
     if request.method=='POST':
         user_id=request.form.get('user_id')
         trekker=Trekker.query.filter_by(user_id=user_id).first()
-        if treeker.status=='notblacklist':
+        if trekker.status=='notblacklist':
             trekker.status='blacklist'
         else:
             trekker.status='notblacklist'
@@ -411,17 +411,7 @@ def booking(trek_id): # book trekking logic
     user=current_user.user_name
     user_email=current_user.email 
     trekker=Trekker.query.filter_by(email=user_email).first()
-    #if request.method=='POST':
-       # cancle=request.form.get('cancle')
-        #if cancle:
-         #   book.status="Cancelled"
-        #    db.session.commit()
-            
-           # trek.Available_slot=int(trek.Available_slot)+1
-           # db.session.commit()
-
-
-            #return redirect(url_for('user_dash'))
+    
 
     
     book=Booking(status='Booked', payment_status='payed',booking_date=date.today(), trek=trek, owener=trekker)
@@ -467,7 +457,46 @@ def userHistory(user_id):
     return render_template('userhistory.html', booking=booking)
 
 
+@login_required 
+@app.route('/staff/dash/profile/', methods=['GET','POST'])
+def profile():
 
+    if request.method=='POST':
+        staff_name=request.form.get('staff_name')
+        email=request.form.get('email')
+        contact=request.form.get('contact')
+        data_staff=Trek_staff.query.filter_by(email=email).first()
+        data_user=Trekker.query.filter_by(email=email).first()
+        if data_staff:
+            data_staff.staff_name=staff_name 
+            data_staff.email=email 
+            if contact:
+             data_staff.contact=contact
+        elif data_user:
+            data_user.user_name=staff_name 
+            data_user.email=email 
+        
+        user_table=User.query.filter_by(email=email).first()
+        user_table.user_name=staff_name 
+        user_table.email=email 
+        db.session.commit() 
+
+        if current_user.role=='Trek_Staff':
+            return redirect(url_for('staff_dash'))
+        else:
+            return redirect(url_for('user_dash'))
+
+    elif request.method=='GET':
+        if current_user.role=="Trek_Staff":
+            email=current_user.email 
+            staff=Trek_staff.query.filter_by(email=email).first()
+            return render_template('profile.html',staff=staff)
+
+        else:
+            email=current_user.email 
+            user=Trekker.query.filter_by(email=email).first() 
+            return render_template('profile.html',user=user)
+         
 
     
 

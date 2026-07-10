@@ -26,9 +26,9 @@
         <td>{{row.user_name}}</td>
         <td>{{row.email}}</td>
         {% if row.status=='notblacklist' %}
-        <td><form action="/admin/user/" method="POST"><lable>Block</lable><input type="button" value="{{row.user_id}}" name="user_id"></form></td>
+        <td><form action="/admin/user/" method="POST"><lable>Block</lable><input type="submit" value="{{row.user_id}}" name="user_id"></form></td>
         {% else %}
-         <td><form action="/admin/user/" method="POST"><lable>unblock</lable><input type="button" value="{{row.user_id}}" name="user_id"></form></td>
+         <td><form action="/admin/user/" method="POST"><lable>unblock</lable><input type="submit" value="{{row.user_id}}" name="user_id"></form></td>
         {% endif %}
         <td><a href="/user/history/{{row.user_id}}/">history</a></td>
         </tr>

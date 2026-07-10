@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>profile</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+    <div style="padding: 25px;">
+        {% if current_user.role=="Trek_Staff" %}
+            <div style="margin:25px;">
+                <form action="/staff/dash/profile/" method="POST" >
+                        <div style="margin:25px;">
+                            <lable>staff name</lable>
+                            <input type="text" name="staff_name" value="{{staff.staff_name}}" required>
+                        </div>
+                        <div style="margin:25px;">
+                            <lable>email</lable>
+                            <input type="email" name="email" value="{{staff.email}}" required> 
+
+                        </div>
+                        <div style="margin:25px;">
+                            <lable>contact</lable>
+                            <input type="text" name="contact" value="{{staff.contact}}" required> 
+
+
+                        </div>
+                        <div style="margin:25px;">
+                            <button type="submit">change</button>
+                        </div>
+                </form>
+            
+            </div>
+
+        {% elif current_user.role=='Trekker'%}
+            <div style="margin:25px;">
+                <form action="/staff/dash/profile/" method="POST" >
+                        <div style="margin:25px;">
+                            <lable>name</lable>
+                            <input type="text" name="staff_name" value="{{user.user_name}}" required>
+                        </div>
+                        <div style="margin:25px;">
+                            <lable>email</lable>
+                            <input type="email" name="email" value="{{user.email}}" required> 
+
+                        </div>
+                        
+                        <div style="margin:25px;">
+                            <button type="submit">change</button>
+                        </div>
+                </form>
+            
+            </div>
+       
+        {% endif %}
+
+    </div>
+</body>
+</html>
