@@ -48,17 +48,18 @@
         <div class="container-fluid" >
             <p style="margin-left: 900px;">Filter BY:</p>
             <form action="/userDashboard/" method="POST">
+                <lable>difficulty</lable>
                 <select class="form-select" aria-label="Default select example" style="width:155px; margin:15px;" name="difficulty">
-                    <option selected>Difficulty</option>
+                    <option selected value=" ">None</option>
                     <option value="Easy">Easy</option>
                     <option value="Moderate">Medium</option>
                     <option value="Hard">Hard</option>
                 </select>
-
+                <lable>Location</lable>
                 <select class="form-select" aria-label="Default select example" style="width:155px; margin:15px;" name="location">
-                    <option selected>Location</option>
+                    <option selected value=" ">None</option>
                     {% for row in location %}
-                    <option value="{{row[0]}}">{{row}}</option>
+                    <option value="{{row[0]}}">{{row[0]}}</option>
                     {% endfor %}
                     
                 </select>
@@ -105,7 +106,7 @@
                     <td>{{row.s_date}}</td>
                     <td>{{row.e_date}}</td>
                     <td>{{row.total_slot}}</td>
-                    {% if row.status != 'complete' %}
+                    {% if row.status2 != 'complete' %}
                       {% if row.Available_slot==0 %} 
                         <td style="color:red;">Fulled</td>
 
@@ -154,7 +155,15 @@
                     <td>{{row.s_date}}</td>
                     <td>{{row.e_date}}</td>
                     <td>{{row.total_slot}}</td>
-                    <td><a href="/booking/details/{{row.trek_id}}/">book now</a></td>
+                    {% if row.status2 != 'complete' %}
+                      {% if row.Available_slot==0 %} 
+                        <td style="color:red;">Fulled</td>
+                      {% else %}
+                       <td><a href="/booking/details/{{row.trek_id}}/">book now</a></td>
+                      {% endif %}
+                    {% else %}
+                      <td>completed</td>
+                    {% endif %}
                     </tr>
                     {% endfor %}
                     
@@ -197,7 +206,15 @@
                     <td>{{row.s_date}}</td>
                     <td>{{row.e_date}}</td>
                     <td>{{row.total_slot}}</td>
-                    <td><a href="/booking/details/{{row.trek_id}}/">book now</a></td>
+                    {% if row.status2 != 'complete' %}
+                      {% if row.Available_slot==0 %} 
+                        <td style="color:red;">Fulled</td>
+                      {% else %}
+                        <td><a href="/booking/details/{{row.trek_id}}/">book now</a></td>
+                      {% endif %} 
+                    {% else %} 
+                          <td>completed</td>
+                    {% endif %}
                     </tr>
                     {% endfor %}
                     

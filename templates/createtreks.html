@@ -24,15 +24,15 @@
                 <form action="/createTrek/byadmin/" method="POST">
                     <div class="mb-3">
                     <label for="Trekname" class="form-label">Trek name</label>
-                    <input type="text" class="form-control" id="Trekname" placeholder="name of the place" name="trek_name">
+                    <input type="text" class="form-control" id="Trekname" placeholder="name of the place" name="trek_name" required>
                     </div>
                     <div class="mb-3">
                     <label for="location" class="form-label">Location</label>
-                    <input type="text" class="form-control" id="location" placeholder="name of the place" name="location">
+                    <input type="text" class="form-control" id="location" placeholder="name of the place" name="location" required>
                     </div>
                     <div class="mb-3">
                     <label for="location" class="form-label">Difficulty</label>
-                    <select class="form-select" aria-label="Default select example" name="difficulty">
+                    <select class="form-select" aria-label="Default select example" name="difficulty" required>
                         <option selected>Open this select menu</option>
                         <option value="Easy">Easy</option>
                         <option value="Moderate">Modrate</option>
@@ -41,23 +41,23 @@
                     </div>
                     <div class="mb-3">
                     <label for="location" class="form-label">Duration(in Days)</label>
-                    <input type="text" class="form-control" id="location"  name="duration">
+                    <input type="text" class="form-control" id="location"  name="duration" required>
                     </div>
                     <div class="mb-3">
                     <label for="location" class="form-label">Route</label>
-                    <input  class="form-control" id="location" placeholder="x to y " name="rute">
+                    <input  class="form-control" id="location" placeholder="x to y " name="rute" required>
                     </div>
                     <div class="mb-3">
                     <label for="location" class="form-label">Available Slots</label>
-                    <input  class="form-control" id="location"  name="slot">
+                    <input  class="form-control" id="location"  name="slot" required>
                     </div>
                     <div class="mb-3">
                     <label for="location" class="form-label">start date</label>
-                    <input type="date" class="form-control" id="location"  name="start">
+                    <input type="date" class="form-control" id="location"  name="start" required>
                     </div>
                     <div class="mb-3">
                     <label for="location" class="form-label">end date</label>
-                    <input type="date" class="form-control" id="location"  name="end_date" min="{{today}}">
+                    <input type="date" class="form-control" id="location"  name="end_date" min="{{today}}" required>
                     </div>
                     <div class="mb-3">
                         <label for="location" class="form-label">Assigned staff</label>
@@ -73,8 +73,8 @@
                     </div>
                     <div class="mb-3">
                     <label for="location" class="form-label">status</label>
-                    <select class="form-select" aria-label="Default select example" name="status">
-                        <option selected>--select status--</option>
+                    <select class="form-select" aria-label="Default select example" name="status" required>
+                        <option >--select status--</option>
                         
                         <option value="Open">open</option>
                         <option value="Closed">closed</option>
@@ -84,8 +84,8 @@
                     </div>
                     <div class="mb-3">
                     <label for="location" class="form-label">mark as start/complete/not start</label>
-                    <select class="form-select" aria-label="Default select example" name="mark">
-                        <option selected>--choose one--</option>
+                    <select class="form-select" aria-label="Default select example" name="mark" required>
+                        <option >--choose one--</option>
                         
                         <option value="start">start</option>
                         <option value="not_start">not_start</option>

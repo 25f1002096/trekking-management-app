@@ -5,7 +5,9 @@ This is a smart trekking management app that helps user discover,book,and explor
 <li>
   <p>i faced issues with syntax errors,typos, and incorrect logical sequence of code lines.I successfully resolved them by tracking error logs and refactoring the code structure.
 </li>
-
+<li>
+ <p> I faced an issue on the user dashboard while implementing the search filter logic. I have successfully resolved it for the 'difficulty' filter, allowing it to fetch data independently. I am currently working on optimizing the backend logic for the 'location' filter to achieve the same independent functionality.</p>
+</li>
 
 </ul>
 

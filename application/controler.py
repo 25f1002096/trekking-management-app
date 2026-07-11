@@ -114,7 +114,7 @@ def adm_dash():
         count_users=Trekker.query.count()
         data1=None
         data2=None 
-
+        data3=None 
         wait_staff=Trek_staff.query.filter_by(status='blacklist').all()
         approved_staff=Trek_staff.query.filter_by(status='approved').all()
         treks=Trek.query.all()
@@ -122,7 +122,8 @@ def adm_dash():
             search_data=request.form.get('seaq')
             data1=Trek_staff.query.filter(Trek_staff.staff_name.ilike(f'%{search_data}%')).all()
             data2=Trek.query.filter(Trek.Trek_name.ilike(f'%{search_data}%')).all() 
-            return render_template('admindash.html',data1=data1,data2=data2,count_User=count_users, count_staff=count_staff, count_treks=count_treks,count_booking=count_booking,wait_staff=wait_staff, approved_staff=approved_staff, treks=treks)
+            data3=Trekker.query.filter(Trekker.user_name.ilike(f'%{search_data}%')).all()
+            return render_template('admindash.html',data1=data1,data2=data2,count_User=count_users, count_staff=count_staff, count_treks=count_treks,count_booking=count_booking,wait_staff=wait_staff, approved_staff=approved_staff, treks=treks,data3=data3)
             
         else:
             
@@ -344,7 +345,7 @@ def manageTrek(trek_id):
             trek=Trek.query.filter_by(trek_id=trek_id).update(dict(status='Closed'))
             db.session.commit() 
         
-        flash('Update successfully', 'success')
+        
         return redirect(url_for('staff_dash'))
 
 
@@ -382,20 +383,22 @@ def user_dash():
             search_data=request.form.get('search_data')
             difficulty=request.form.get('difficulty')
             location1=request.form.get('location')
+            print(location1)
             data='None'
+            trek_data=None 
             if search_data:
                 trek_data=Trek.query.filter(Trek.Trek_name.ilike(f'%{search_data}%'))
 
             if difficulty and location1 :
                 data=Trek.query.filter_by(Difficulty=difficulty,location=location1).all()
 
-            elif difficulty or location :
-                if difficulty:
+            #elif difficulty or location1 : 
+            if difficulty:
                     data=Trek.query.filter_by(Difficulty=difficulty).all()
-                else:
+            if location1 :
                     data=Trek.query.filter_by(location=location1).all() 
                     
-                    
+            print(data)       
             return render_template('user.html',location=location,trek_data=trek_data,data=data,Treks=trek, user_id=status,user=user,status=status ) 
 
         else:

@@ -125,7 +125,28 @@
       </tbody>
     </table>
   {% endif %}
-  
+  {% if data3 %}
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">name</th>
+          <th scope="col">email</th>
+          <th scope="col">status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in data3 %}
+          <tr>
+            <th scope="row">1</th>
+            <td>{{row.user_name}}</td>
+            <td>{{row.email}}</td>
+            <td>{{row.status}}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% endif %}
   
 
 

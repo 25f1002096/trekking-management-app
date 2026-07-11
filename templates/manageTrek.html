@@ -37,20 +37,20 @@
         <label for="exampleFormControlInput1" class="form-label">end_date</label>
         <input class="form-control" type="text" value="{{trek.e_date}}" aria-label="readonly input example" readonly>
         <label for="exampleFormControlInput1" class="form-label">total_slot</label>
-        <input class="form-control" type="text" value="{{trek.total_slot}}" aria-label="readonly input example" name="total_slot" >
+        <input class="form-control" type="text" value="{{trek.total_slot}}" aria-label="readonly input example" name="total_slot" required >
         <label for="exampleFormControlInput1" class="form-label">Available_slot</label>
         <input class="form-control" type="text" value="{{trek.Available_slot}}" aria-label="readonly input example" name="available_slot" readonly>
         <label for="exampleFormControlInput1" class="form-label">Status</label>
-        <select class="form-select" aria-label="Default select example" name="status">
-            <option selected>Open this select menu</option>
+        <select class="form-select" aria-label="Default select example" name="status" required>
+            <option >Open this select menu</option>
             <option value="Closed">closed</option>
             <option value="Open">open</option>
         </select>
 
         <label for="exampleFormControlInput1" class="form-label">Mark AS Started/Completed 
         </label>
-        <select class="form-select" aria-label="Default select example" name="mark">
-            <option selected>Open this select menu</option>
+        <select class="form-select" aria-label="Default select example" name="mark" required>
+            <option >Open this select menu</option>
             <option value="start">Start</option>
             <option value="complete">Complete</option>
         </select>
