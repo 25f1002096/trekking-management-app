@@ -23,7 +23,7 @@
                 <form action="/admin/trek/edit/{{trek.trek_id}}/" method="POST">
                     <div class="mb-3">
                     <label for="Trekname" class="form-label">Trek name</label>
-                    <input type="text" class="form-control" value="trek.Trek_name" id="Trekname" placeholder="name of the place" name="trek_name">
+                    <input type="text" class="form-control" value="{{trek.Trek_name}}" id="Trekname" placeholder="name of the place" name="trek_name">
                     </div>
                     <div class="mb-3">
                     <label for="location" class="form-label">Location</label>
@@ -32,7 +32,7 @@
                     <div class="mb-3">
                     <label for="location" class="form-label">Difficulty</label>
                     <select class="form-select" aria-label="Default select example" name="difficulty">
-                        <option >Open this select menu</option>
+                        <option value="{{trek.Difficulty}}">Open this select menu</option>
                         <option value="Easy">Easy</option>
                         <option value="Moderate">Modrate</option>
                         <option value="Hard">Difficult</option>
@@ -63,14 +63,14 @@
                         
                             
                             {% for row in data %}
-                            <label><input type="checkbox" name="staff" value="{{row.staff_id}}"> {{row.staff_id}},{{row.staff_name}}</label>
+                            <input type="checkbox" name="staff" value="{{row.staff_id}}"> {{row.staff_id}},{{row.staff_name}}
                             {% endfor %}
                         
                     </div>
                     <div class="mb-3">
                     <label for="location" class="form-label">status</label>
                     <select class="form-select" aria-label="Default select example" name="status" value="{{trek.status}}">
-                        <option >--select status--</option>
+                        <option value="{{trek.status}}" >--select status--</option>
                         
                         <option value="Open">open</option>
                         <option value="Closed">closed</option>
@@ -81,7 +81,7 @@
                     <div class="mb-3">
                     <label for="location" class="form-label">mark as start/complete/not start</label>
                     <select class="form-select" aria-label="Default select example" name="mark" value="{{trek.status2}}">
-                        <option >--choose one--</option>
+                        <option value="{{trek.status2}}">--choose one--</option>
                         
                         <option value="start">start</option>
                         <option value="not_start">not_start</option>

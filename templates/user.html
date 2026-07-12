@@ -93,7 +93,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for row in trek_data %}
+                {% for row in trek_data %}
                     <tr>
                     <th scope="col">1</th>
                     <td>{{row.Trek_name}}</td>
@@ -117,7 +117,7 @@
                     <td>completed</td>
                     {% endif %}
                     </tr>
-                    {% endfor %}
+                {% endfor %}
 
                     
                 </tbody>
@@ -142,7 +142,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for row in data %}
+                {% for row in data %}
                     <tr>
                     <th scope="row">1</th>
                     <td>{{row.Trek_name}}</td>
@@ -165,7 +165,7 @@
                       <td>completed</td>
                     {% endif %}
                     </tr>
-                    {% endfor %}
+                {% endfor %}
                     
                 </tbody>
             </table>

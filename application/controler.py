@@ -216,7 +216,7 @@ def create_trek():
 @app.route('/admin/trek/edit/<trek_id>/', methods=['GET','POST'] )
 def edit_trek(trek_id):
     trek=Trek.query.filter_by(trek_id=trek_id).first()
-    data=trek.assigned_staff
+    data=Trek_staff.query.all()#trek.assigned_staff
     today=date.today()
     if request.method=='POST':
         trek_name=request.form.get('trek_name')
@@ -243,7 +243,17 @@ def edit_trek(trek_id):
         trek.s_date=ss_date 
         trek.e_date=ee_date 
         trek.total_slot=total_slot 
-        trek.assigned_staff=assign_staff 
+        #trek.assigned_staff=assign_staff 
+        real_assign_staff=[]
+        if assign_staff:
+            for row in assign_staff:
+                staff_member=Trek_staff.query.filter_by(staff_id=row).first()
+                if staff_member:
+
+                    real_assign_staff.append(staff_member) 
+         
+            trek.assigned_staff= real_assign_staff  
+             
         trek.Available_slot=int(total_slot)-len(trek.book) 
         db.session.commit() 
         return redirect(url_for('adm_dash'))
@@ -384,7 +394,7 @@ def user_dash():
             difficulty=request.form.get('difficulty')
             location1=request.form.get('location')
             print(location1)
-            data='None'
+            data=None
             trek_data=None 
             if search_data:
                 trek_data=Trek.query.filter(Trek.Trek_name.ilike(f'%{search_data}%'))
@@ -392,10 +402,10 @@ def user_dash():
             if difficulty and location1 :
                 data=Trek.query.filter_by(Difficulty=difficulty,location=location1).all()
 
-            #elif difficulty or location1 : 
-            if difficulty:
+            elif difficulty or location1 : 
+                if difficulty:
                     data=Trek.query.filter_by(Difficulty=difficulty).all()
-            if location1 :
+                elif location1 :
                     data=Trek.query.filter_by(location=location1).all() 
                     
             print(data)       
@@ -407,7 +417,7 @@ def user_dash():
     else:
         return {'message':'forbidend_acess'},403 
 
-@login_required
+@login_required 
 @app.route("/booking/details/<trek_id>/" ) 
 def booking(trek_id): # book trekking logic 
     trek=Trek.query.filter_by(trek_id=trek_id).first()

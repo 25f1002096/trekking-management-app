@@ -72,7 +72,7 @@
                 <td>{{row.status}}</td>
                 {% if current_user.role =='Trekker' %}
 
-                <td><form action='/user/booking/cancle/{{row.book_id}}/' method='POST'><input type='hidden' value='cancle' name='cancle'>
+                <td><form action='/user/booking/cancle/{{row.Book_id}}/' method='POST'><input type='hidden' value='cancle' name='cancle'>
                     <button type="submit">Cancle</button>
                 </form></td>
                 {% endif %}
