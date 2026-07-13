@@ -10,5 +10,11 @@ This is a smart trekking management app that helps user discover,book,and explor
 </li>
 
 </ul>
+###Pre-request 
+install all importing package like flask, flask-login flask-bcrypt python etc 
+
+To start the placement portal, open your terminal or command prompt, navigate to the folder containing your app.py file, and run the following command: 
+python app.py 
+After running that, your server should be active, and you can access the application in your web browser.  
 
 
